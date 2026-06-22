@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios | FinControl</title>
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                <h2>FinControl</h2>
+            </div>
+
+            <nav>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="transacoes.html">Transações</a>
+                <a href="categorias.html">Categorias</a>
+                <a href="relatorios.html" class="active">Relatórios</a>
+                <a href="perfil.html">Perfil</a>
+            </nav>
+
+            <button id="btnLogout" class="btn-logout">Sair</button>
+
+        </aside>
+
+        <main class="content">
+
+            <header class="header">
+                <h1>Relatórios</h1>
+                <span id="usuarioNome">Carregando...</span>
+            </header>
+
+            <section class="panel">
+                <h2>Filtros</h2>
+
+                <form id="filtrosForm" class="form-grid">
+
+                    <div class="form-group">
+                        <label for="filtroTipo">Tipo</label>
+                        <select id="filtroTipo">
+                            <option value="">Todos</option>
+                            <option value="receita">Receitas</option>
+                            <option value="despesa">Despesas</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="filtroCategoria">Categoria</label>
+                        <select id="filtroCategoria">
+                            <option value="">Todas</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dataInicio">Data inicial</label>
+                        <input type="date" id="dataInicio">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dataFim">Data final</label>
+                        <input type="date" id="dataFim">
+                    </div>
+
+                    <div class="form-actions full">
+                        <button type="submit" class="btn-primary">
+                            Gerar relatório
+                        </button>
+
+                        <button type="button" class="btn-secondary" id="btnLimparFiltros">
+                            Limpar filtros
+                        </button>
+                    </div>
+
+                    <div id="mensagem" class="message full"></div>
+
+                </form>
+            </section>
+
+            <section class="cards">
+                <div class="card">
+                    <h3>Receitas no período</h3>
+                    <p id="totalReceitas">R$ 0,00</p>
+                </div>
+
+                <div class="card">
+                    <h3>Despesas no período</h3>
+                    <p id="totalDespesas">R$ 0,00</p>
+                </div>
+
+                <div class="card">
+                    <h3>Saldo do período</h3>
+                    <p id="saldoPeriodo">R$ 0,00</p>
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="section-header">
+                    <h2>Transações encontradas</h2>
+                    <span id="quantidadeRegistros">0 registros</span>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Tipo</th>
+                                <th>Status</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tabelaRelatorio">
+                            <tr>
+                                <td colspan="6">Carregando...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../javascript/api.js"></script>
+    <script src="../javascript/auth.js"></script>
+    <script src="../javascript/relatorios.js"></script>
+
+</body>
+
+</html>
