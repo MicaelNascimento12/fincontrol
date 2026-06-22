@@ -8,34 +8,43 @@ from datetime import datetime, timedelta, timezone
 from core.config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_HOURS
 
 
-# ── Senha ────────────────────────────────────────────────────
-
 def hash_senha(senha: str) -> str:
     return bcrypt.hashpw(
         senha.encode("utf-8"),
-        bcrypt.gensalt()).decode("utf-8")
+        bcrypt.gensalt()
+    ).decode("utf-8")
+
 
 def verificar_senha(senha: str, hash: str) -> bool:
     return bcrypt.checkpw(
         senha.encode("utf-8"),
-        hash.encode("utf-8"))
+        hash.encode("utf-8")
+    )
 
-# ── JWT ──────────────────────────────────────────────────────
 
-def criar_token(user_id: int) -> str:
+def criar_token(user_id: str) -> str:
     expiracao = datetime.now(timezone.utc) + timedelta(
-        hours=ACCESS_TOKEN_EXPIRE_HOURS)
-    
+        hours=ACCESS_TOKEN_EXPIRE_HOURS
+    )
+
     payload = {
-        "sub": str(user_id),
-        "exp": expiracao}
-    
+        "sub": user_id,
+        "exp": expiracao
+    }
+
     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
 
-def decodificar_token(token: str) -> int:
+
+def decodificar_token(token: str) -> str:
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        return int(payload.get("sub"))
+        user_id = payload.get("sub")
+
+        if not user_id:
+            raise ValueError("Token inválido")
+
+        return user_id
+
     except jwt.ExpiredSignatureError:
         raise ValueError("Token expirado")
     except jwt.InvalidTokenError:

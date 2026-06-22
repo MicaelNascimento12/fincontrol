@@ -51,7 +51,7 @@ def criar(
 
 @router.put("/{transacao_id}", response_model=TransacaoResponse)
 def atualizar(
-    transacao_id: int,
+    transacao_id: str,
     dados: TransacaoUpdate,
     db: Session = Depends(get_db),
     usuario: Usuario = Depends(get_usuario_atual)
@@ -67,7 +67,7 @@ def atualizar(
 
 @router.delete("/{transacao_id}", status_code=204)
 def deletar(
-    transacao_id: int,
+    transacao_id: str,
     db: Session = Depends(get_db),
     usuario: Usuario = Depends(get_usuario_atual)
 ):
