@@ -10,7 +10,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("filtroTipo").addEventListener("change", listarTransacoes);
     document.getElementById("filtroCategoria").addEventListener("change", listarTransacoes);
 
+    document.getElementById("tipo").addEventListener("change", atualizarOpcoesStatus);
+
     preencherDataAtual();
+    atualizarOpcoesStatus();
 
     await carregarPerfil();
     await carregarCategorias();
@@ -128,7 +131,7 @@ function renderizarTabela() {
                 </td>
                 <td>
                     <span class="badge ${transacao.status}">
-                        ${transacao.status}
+                        ${formatarStatus(transacao.status, transacao.tipo)}
                     </span>
                 </td>
                 <td>${formatarMoeda(transacao.valor)}</td>
@@ -200,6 +203,7 @@ function editarTransacao(id) {
     document.getElementById("valor").value = transacao.valor;
     document.getElementById("data").value = transacao.data;
     document.getElementById("tipo").value = transacao.tipo;
+    atualizarOpcoesStatus();
     document.getElementById("status").value = transacao.status;
     document.getElementById("categoria").value = transacao.categoria_id;
     document.getElementById("observacao").value = transacao.observacao || "";
@@ -262,4 +266,33 @@ function mostrarMensagem(texto, tipo) {
         mensagem.className = "message";
         mensagem.textContent = "";
     }, 3000);
+}
+
+function atualizarOpcoesStatus() {
+    const tipo = document.getElementById("tipo").value;
+    const status = document.getElementById("status");
+
+    if (tipo === "receita") {
+        status.innerHTML = `
+            <option value="pago">Recebido</option>
+            <option value="pendente">A receber</option>
+            <option value="cancelado">Cancelado</option>
+        `;
+    } else {
+        status.innerHTML = `
+            <option value="pago">Pago</option>
+            <option value="pendente">Pendente</option>
+            <option value="cancelado">Cancelado</option>
+        `;
+    }
+}
+
+function formatarStatus(status, tipo) {
+    if (tipo === "receita") {
+        if (status === "pago") return "recebido";
+        if (status === "pendente") return "a receber";
+        return "cancelado";
+    }
+
+    return status;
 }
