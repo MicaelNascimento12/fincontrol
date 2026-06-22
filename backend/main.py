@@ -4,7 +4,7 @@
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import auth, categorias, transacoes, dashboard
+from routers import auth, categorias, transacoes, dashboard, usuarios
 
 app = FastAPI(
     title="FinControl API",
@@ -26,6 +26,7 @@ app.include_router(auth.router)
 app.include_router(categorias.router)
 app.include_router(transacoes.router)
 app.include_router(dashboard.router)
+app.include_router(usuarios.router)
 
 
 @app.get("/", tags=["Health Check"])

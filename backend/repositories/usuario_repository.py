@@ -10,7 +10,7 @@ def buscar_por_email(db: Session, email: str) -> Usuario | None:
     return db.query(Usuario).filter(Usuario.email == email).first()
 
 
-def buscar_por_id(db: Session, user_id: int) -> Usuario | None:
+def buscar_por_id(db: Session, user_id: str) -> Usuario | None:
     return db.query(Usuario).filter(Usuario.id == user_id).first()
 
 
