@@ -85,14 +85,18 @@
 
             <!-- Próximos gráficos -->
 
-            <section class="panel">
+            <section class="charts-grid">
+                <div class="panel">
+                    <h2>Gastos por Categoria</h2>
+                    <p id="semDadosCategorias" class="empty-message">Nenhuma despesa paga cadastrada.</p>
+                    <canvas id="graficoCategorias"></canvas>
+                </div>
 
-                <h2>Resumo Financeiro</h2>
-
-                <p>
-                    Em breve aqui teremos os gráficos de categorias e fluxo mensal.
-                </p>
-
+                <div class="panel">
+                    <h2>Fluxo Mensal</h2>
+                    <p id="semDadosFluxo" class="empty-message">Nenhuma transação paga cadastrada.</p>
+                    <canvas id="graficoFluxoMensal"></canvas>
+                </div>
             </section>
 
         </main>
@@ -101,6 +105,7 @@
 
     <script src="../javascript/api.js"></script>
     <script src="../javascript/auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../javascript/dashboard.js"></script>
 
 </body>
