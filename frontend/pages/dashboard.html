@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | FinControl</title>
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <!-- Sidebar -->
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                <h2>FinControl</h2>
+            </div>
+
+            <nav>
+
+                <a href="dashboard.html" class="active">
+                    📊 Dashboard
+                </a>
+
+                <a href="#">
+                    💰 Transações
+                </a>
+
+                <a href="#">
+                    🏷️ Categorias
+                </a>
+
+                <a href="#">
+                    👤 Perfil
+                </a>
+
+            </nav>
+
+            <button id="btnLogout" class="btn-logout">
+                Sair
+            </button>
+
+        </aside>
+
+        <!-- Conteúdo -->
+
+        <main class="content">
+
+            <header class="header">
+
+                <h1>Dashboard Financeiro</h1>
+
+                <span id="usuarioNome">
+                    Carregando...
+                </span>
+
+            </header>
+
+            <!-- Cards -->
+
+            <section class="cards">
+
+                <div class="card">
+                    <h3>Saldo Atual</h3>
+                    <p id="saldo">R$ 0,00</p>
+                </div>
+
+                <div class="card">
+                    <h3>Receitas</h3>
+                    <p id="receitas">R$ 0,00</p>
+                </div>
+
+                <div class="card">
+                    <h3>Despesas</h3>
+                    <p id="despesas">R$ 0,00</p>
+                </div>
+
+            </section>
+
+            <!-- Próximos gráficos -->
+
+            <section class="panel">
+
+                <h2>Resumo Financeiro</h2>
+
+                <p>
+                    Em breve aqui teremos os gráficos de categorias e fluxo mensal.
+                </p>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../javascript/api.js"></script>
+    <script src="../javascript/auth.js"></script>
+    <script src="../javascript/dashboard.js"></script>
+
+</body>
+
+</html>

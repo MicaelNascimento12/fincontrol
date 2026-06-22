@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | FinControl</title>
+    <title>Cadastro | FinControl</title>
     <link rel="stylesheet" href="../css/global.css">
 </head>
 <body>
@@ -11,16 +11,21 @@
         <section class="auth-left">
             <h1>FinControl</h1>
             <p>
-                Controle suas receitas, despesas, categorias e acompanhe sua vida financeira em um painel simples e moderno.
+                Crie sua conta e comece a organizar suas finanças com categorias automáticas, dashboard e controle de transações.
             </p>
         </section>
 
         <section class="auth-right">
             <div class="auth-card">
-                <h2>Entrar</h2>
-                <p>Acesse sua conta para continuar.</p>
+                <h2>Criar conta</h2>
+                <p>Preencha os dados para começar.</p>
 
-                <form id="loginForm">
+                <form id="cadastroForm">
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" required placeholder="Seu nome">
+                    </div>
+
                     <div class="form-group">
                         <label for="email">E-mail</label>
                         <input type="email" id="email" required placeholder="seuemail@exemplo.com">
@@ -28,17 +33,17 @@
 
                     <div class="form-group">
                         <label for="senha">Senha</label>
-                        <input type="password" id="senha" required placeholder="Digite sua senha">
+                        <input type="password" id="senha" required minlength="6" placeholder="Mínimo 6 caracteres">
                     </div>
 
-                    <button type="submit" class="btn-primary">Entrar</button>
+                    <button type="submit" class="btn-primary">Criar conta</button>
 
                     <div id="mensagem" class="message"></div>
                 </form>
 
                 <div class="auth-footer">
-                    Ainda não tem conta?
-                    <a href="cadastro.html">Criar conta</a>
+                    Já tem conta?
+                    <a href="login.html">Entrar</a>
                 </div>
             </div>
         </section>
@@ -49,12 +54,13 @@
     <script>
         redirecionarSeLogado();
 
-        const form = document.getElementById("loginForm");
+        const form = document.getElementById("cadastroForm");
         const mensagem = document.getElementById("mensagem");
 
         form.addEventListener("submit", async (event) => {
             event.preventDefault();
 
+            const nome = document.getElementById("nome").value;
             const email = document.getElementById("email").value;
             const senha = document.getElementById("senha").value;
 
@@ -62,7 +68,7 @@
             mensagem.textContent = "";
 
             try {
-                await login(email, senha);
+                await cadastrar(nome, email, senha);
             } catch (error) {
                 mensagem.className = "message error";
                 mensagem.textContent = error.message;

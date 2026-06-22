@@ -1,0 +1,153 @@
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --background: #f3f4f6;
+    --card: #ffffff;
+    --text: #111827;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --danger: #dc2626;
+    --success: #16a34a;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+}
+
+.auth-left {
+    flex: 1;
+    background: linear-gradient(135deg, var(--primary), #0f172a);
+    color: white;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auth-left h1 {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.auth-left p {
+    font-size: 18px;
+    max-width: 500px;
+    line-height: 1.6;
+}
+
+.auth-right {
+    width: 480px;
+    background: var(--card);
+    padding: 60px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auth-card h2 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.auth-card p {
+    color: var(--muted);
+    margin-bottom: 32px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.btn-primary {
+    width: 100%;
+    border: none;
+    background: var(--primary);
+    color: white;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+}
+
+.auth-footer {
+    margin-top: 24px;
+    color: var(--muted);
+    text-align: center;
+}
+
+.message {
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    display: none;
+}
+
+.message.error {
+    display: block;
+    background: #fee2e2;
+    color: var(--danger);
+}
+
+.message.success {
+    display: block;
+    background: #dcfce7;
+    color: var(--success);
+}
+
+@media (max-width: 850px) {
+    .auth-page {
+        flex-direction: column;
+    }
+
+    .auth-left {
+        padding: 40px 24px;
+    }
+
+    .auth-right {
+        width: 100%;
+        padding: 40px 24px;
+    }
+}
