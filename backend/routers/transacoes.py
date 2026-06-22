@@ -18,7 +18,7 @@ router = APIRouter(prefix="/transacoes", tags=["Transações"])
 @router.get("/", response_model=list[TransacaoResponse])
 def listar(
     tipo: TipoEnum | None = Query(default=None),
-    categoria_id: int | None = Query(default=None),
+    categoria_id: str | None = Query(default=None),
     data_inicio: date | None = Query(default=None),
     data_fim: date | None = Query(default=None),
     db: Session = Depends(get_db),
