@@ -27,8 +27,7 @@ async function carregarPerfil() {
     try {
         const usuario = await apiRequest("/usuarios/me");
 
-        document.getElementById("usuarioNome").textContent =
-            usuario.nome;
+        atualizarUsuarioTopo(usuario.nome);
     } catch (erro) {
         console.error(erro);
     }

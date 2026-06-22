@@ -109,7 +109,7 @@ async function atualizarPerfil(event) {
         });
 
         usuarioLogado = usuarioAtualizado;
-        document.getElementById("usuarioNomeTopo").textContent = usuarioAtualizado.nome;
+        atualizarUsuarioTopo(usuarioLogado.nome);
 
         bloquearPerfil();
         mostrarMensagem("mensagemPerfil", "Perfil atualizado com sucesso!", "success");

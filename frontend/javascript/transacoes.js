@@ -2,6 +2,7 @@ protegerPagina();
 
 let categorias = [];
 let transacoes = [];
+let transacaoIdParaExcluir = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("btnLogout").addEventListener("click", logout);
@@ -9,11 +10,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("btnCancelarEdicao").addEventListener("click", limparFormulario);
     document.getElementById("filtroTipo").addEventListener("change", listarTransacoes);
     document.getElementById("filtroCategoria").addEventListener("change", listarTransacoes);
-
     document.getElementById("tipo").addEventListener("change", atualizarOpcoesStatus);
+
+    document.getElementById("btnFecharModalTransacao")
+        .addEventListener("click", fecharModalExcluirTransacao);
+
+    document.getElementById("btnConfirmarExcluirTransacao")
+        .addEventListener("click", confirmarExclusaoTransacao);
 
     preencherDataAtual();
     atualizarOpcoesStatus();
+    esconderCancelarEdicao();
 
     await carregarPerfil();
     await carregarCategorias();
@@ -22,13 +29,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 function formatarMoeda(valor) {
-    return Number(valor).toLocaleString(
-        "pt-BR",
-        {
-            style: "currency",
-            currency: "BRL"
-        }
-    );
+    return Number(valor).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
 }
 
 
@@ -37,10 +41,51 @@ function formatarData(data) {
 }
 
 
+function formatarStatus(status, tipo) {
+    if (tipo === "receita") {
+        if (status === "pago") return "recebido";
+        if (status === "pendente") return "a receber";
+        return "cancelado";
+    }
+
+    return status;
+}
+
+
+function atualizarOpcoesStatus() {
+    const tipo = document.getElementById("tipo").value;
+    const status = document.getElementById("status");
+
+    if (tipo === "receita") {
+        status.innerHTML = `
+            <option value="pago">Recebido</option>
+            <option value="pendente">A receber</option>
+            <option value="cancelado">Cancelado</option>
+        `;
+    } else {
+        status.innerHTML = `
+            <option value="pago">Pago</option>
+            <option value="pendente">Pendente</option>
+            <option value="cancelado">Cancelado</option>
+        `;
+    }
+}
+
+
+function mostrarCancelarEdicao() {
+    document.getElementById("btnCancelarEdicao").style.display = "inline-block";
+}
+
+
+function esconderCancelarEdicao() {
+    document.getElementById("btnCancelarEdicao").style.display = "none";
+}
+
+
 async function carregarPerfil() {
     try {
         const usuario = await apiRequest("/usuarios/me");
-        document.getElementById("usuarioNome").textContent = usuario.nome;
+        atualizarUsuarioTopo(usuario.nome);
     } catch (erro) {
         console.error(erro);
     }
@@ -78,23 +123,16 @@ async function listarTransacoes() {
         const categoriaId = document.getElementById("filtroCategoria").value;
 
         let endpoint = "/transacoes/";
-
         const params = new URLSearchParams();
 
-        if (tipo) {
-            params.append("tipo", tipo);
-        }
-
-        if (categoriaId) {
-            params.append("categoria_id", categoriaId);
-        }
+        if (tipo) params.append("tipo", tipo);
+        if (categoriaId) params.append("categoria_id", categoriaId);
 
         if ([...params].length > 0) {
             endpoint += `?${params.toString()}`;
         }
 
         transacoes = await apiRequest(endpoint);
-
         renderizarTabela();
     } catch (erro) {
         console.error(erro);
@@ -117,35 +155,64 @@ function renderizarTabela() {
     tbody.innerHTML = "";
 
     transacoes.forEach(transacao => {
-        const categoria = categorias.find(cat => cat.id === transacao.categoria_id);
+        const categoria = categorias.find(
+            item => item.id === transacao.categoria_id
+        );
+
+        const iconeTipo =
+            transacao.tipo === "receita"
+                ? "arrow-up"
+                : "arrow-down";
 
         tbody.innerHTML += `
             <tr>
                 <td>${formatarData(transacao.data)}</td>
+
                 <td>${transacao.descricao || "-"}</td>
+
                 <td>${categoria ? categoria.nome : "-"}</td>
+
                 <td>
                     <span class="badge ${transacao.tipo}">
+                        <i data-lucide="${iconeTipo}"></i>
                         ${transacao.tipo}
                     </span>
                 </td>
+
                 <td>
                     <span class="badge ${transacao.status}">
-                        ${formatarStatus(transacao.status, transacao.tipo)}
+                        <i data-lucide="circle-check"></i>
+                        ${formatarStatus(
+                            transacao.status,
+                            transacao.tipo
+                        )}
                     </span>
                 </td>
+
                 <td>${formatarMoeda(transacao.valor)}</td>
+
                 <td>
-                    <button class="btn-small btn-edit" onclick="editarTransacao('${transacao.id}')">
+                    <button
+                        class="btn-small btn-edit"
+                        onclick="editarTransacao('${transacao.id}')"
+                    >
+                        <i data-lucide="pencil"></i>
                         Editar
                     </button>
-                    <button class="btn-small btn-delete" onclick="excluirTransacao('${transacao.id}')">
+
+                    <button
+                        class="btn-small btn-delete"
+                        onclick="abrirModalExcluirTransacao('${transacao.id}')"
+                    >
+                        <i data-lucide="trash-2"></i>
                         Excluir
                     </button>
                 </td>
             </tr>
         `;
     });
+
+    renderizarIcones();
 }
 
 
@@ -193,9 +260,7 @@ async function salvarTransacao(event) {
 function editarTransacao(id) {
     const transacao = transacoes.find(item => item.id === id);
 
-    if (!transacao) {
-        return;
-    }
+    if (!transacao) return;
 
     document.getElementById("formTitulo").textContent = "Editar Transação";
     document.getElementById("transacaoId").value = transacao.id;
@@ -207,29 +272,15 @@ function editarTransacao(id) {
     document.getElementById("status").value = transacao.status;
     document.getElementById("categoria").value = transacao.categoria_id;
     document.getElementById("observacao").value = transacao.observacao || "";
+    document.getElementById("btnSalvar").innerHTML = `
+    <i data-lucide="save"></i>
+    <span>Salvar alterações</span>
+`;
 
+renderizarIcones();
+    
+    mostrarCancelarEdicao();
     window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-
-async function excluirTransacao(id) {
-    const confirmar = confirm("Tem certeza que deseja excluir esta transação?");
-
-    if (!confirmar) {
-        return;
-    }
-
-    try {
-        await apiRequest(`/transacoes/${id}`, {
-            method: "DELETE"
-        });
-
-        mostrarMensagem("Transação excluída com sucesso!", "success");
-        await listarTransacoes();
-
-    } catch (erro) {
-        mostrarMensagem(erro.message, "error");
-    }
 }
 
 
@@ -240,6 +291,14 @@ function limparFormulario() {
     document.getElementById("valor").value = "";
     document.getElementById("observacao").value = "";
     document.getElementById("tipo").value = "receita";
+    document.getElementById("btnSalvar").innerHTML = `
+    <i data-lucide="save"></i>
+    <span>Salvar</span>
+`;
+
+renderizarIcones();
+
+    atualizarOpcoesStatus();
     document.getElementById("status").value = "pago";
 
     if (categorias.length) {
@@ -247,12 +306,44 @@ function limparFormulario() {
     }
 
     preencherDataAtual();
+    esconderCancelarEdicao();
 }
 
 
 function preencherDataAtual() {
     const hoje = new Date().toISOString().split("T")[0];
     document.getElementById("data").value = hoje;
+}
+
+
+function abrirModalExcluirTransacao(id) {
+    transacaoIdParaExcluir = id;
+    document.getElementById("modalExcluirTransacao").classList.add("active");
+}
+
+
+function fecharModalExcluirTransacao() {
+    transacaoIdParaExcluir = null;
+    document.getElementById("modalExcluirTransacao").classList.remove("active");
+}
+
+
+async function confirmarExclusaoTransacao() {
+    if (!transacaoIdParaExcluir) return;
+
+    try {
+        await apiRequest(`/transacoes/${transacaoIdParaExcluir}`, {
+            method: "DELETE"
+        });
+
+        fecharModalExcluirTransacao();
+        mostrarMensagem("Transação excluída com sucesso!", "success");
+        await listarTransacoes();
+
+    } catch (erro) {
+        fecharModalExcluirTransacao();
+        mostrarMensagem(erro.message, "error");
+    }
 }
 
 
@@ -266,33 +357,4 @@ function mostrarMensagem(texto, tipo) {
         mensagem.className = "message";
         mensagem.textContent = "";
     }, 3000);
-}
-
-function atualizarOpcoesStatus() {
-    const tipo = document.getElementById("tipo").value;
-    const status = document.getElementById("status");
-
-    if (tipo === "receita") {
-        status.innerHTML = `
-            <option value="pago">Recebido</option>
-            <option value="pendente">A receber</option>
-            <option value="cancelado">Cancelado</option>
-        `;
-    } else {
-        status.innerHTML = `
-            <option value="pago">Pago</option>
-            <option value="pendente">Pendente</option>
-            <option value="cancelado">Cancelado</option>
-        `;
-    }
-}
-
-function formatarStatus(status, tipo) {
-    if (tipo === "receita") {
-        if (status === "pago") return "recebido";
-        if (status === "pendente") return "a receber";
-        return "cancelado";
-    }
-
-    return status;
 }

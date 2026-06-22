@@ -10,27 +10,15 @@
     <link rel="stylesheet" href="../css/components.css">
 </head>
 
-<body>
+<body data-page="relatorios" data-title="Relatórios">
 
     <div class="layout">
 
-        <aside class="sidebar">
+        <aside id="appSidebar" class="sidebar"></aside>
 
-            <div class="logo">
-                <h2>FinControl</h2>
-            </div>
+        <main class="content">
 
-            <nav>
-                <a href="dashboard.html">Dashboard</a>
-                <a href="transacoes.html">Transações</a>
-                <a href="categorias.html">Categorias</a>
-                <a href="relatorios.html" class="active">Relatórios</a>
-                <a href="perfil.html">Perfil</a>
-            </nav>
-
-            <button id="btnLogout" class="btn-logout">Sair</button>
-
-        </aside>
+            <header id="appHeader" class="topbar"></header>
 
         <main class="content">
 
@@ -134,8 +122,11 @@
 
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/lucide@1.21.0/dist/umd/lucide.min.js"></script>
+
     <script src="../javascript/api.js"></script>
     <script src="../javascript/auth.js"></script>
+    <script src="../javascript/ui.js"></script>
     <script src="../javascript/relatorios.js"></script>
 
 </body>

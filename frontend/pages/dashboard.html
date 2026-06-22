@@ -10,47 +10,15 @@
     <link rel="stylesheet" href="../css/components.css">
 </head>
 
-<body>
+<body data-page="dashboard" data-title="Dashboard Financeiro">
 
     <div class="layout">
 
-        <!-- Sidebar -->
+        <aside id="appSidebar" class="sidebar"></aside>
 
-        <aside class="sidebar">
+        <main class="content">
 
-            <div class="logo">
-                <h2>FinControl</h2>
-            </div>
-
-            <nav>
-
-                <a href="dashboard.html" class="active">
-                    Dashboard
-                </a>
-
-                <a href="transacoes.html">
-                    Transações
-                </a>
-
-                <a href="categorias.html">
-                    Categorias
-                </a>
-
-                <a href="perfil.html">
-                    Perfil
-                </a>
-
-                <a href="relatorios.html">
-                    Relatórios
-                </a>
-
-            </nav>
-
-            <button id="btnLogout" class="btn-logout">
-                Sair
-            </button>
-
-        </aside>
+            <header id="appHeader" class="topbar"></header>
 
         <!-- Conteúdo -->
 
@@ -71,17 +39,38 @@
             <section class="cards">
 
                 <div class="card">
-                    <h3>Saldo Atual</h3>
+                    <div class="card-heading">
+                        <span class="card-icon card-icon-balance">
+                            <i data-lucide="wallet"></i>
+                        </span>
+
+                        <h3>Saldo atual</h3>
+                    </div>
+
                     <p id="saldo">R$ 0,00</p>
                 </div>
 
                 <div class="card">
-                    <h3>Receitas</h3>
+                    <div class="card-heading">
+                        <span class="card-icon card-icon-income">
+                            <i data-lucide="trending-up"></i>
+                        </span>
+
+                        <h3>Receitas</h3>
+                    </div>
+
                     <p id="receitas">R$ 0,00</p>
                 </div>
 
                 <div class="card">
-                    <h3>Despesas</h3>
+                    <div class="card-heading">
+                        <span class="card-icon card-icon-expense">
+                            <i data-lucide="trending-down"></i>
+                        </span>
+
+                        <h3>Despesas</h3>
+                    </div>
+
                     <p id="despesas">R$ 0,00</p>
                 </div>
 
@@ -107,11 +96,13 @@
 
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/lucide@1.21.0/dist/umd/lucide.min.js"></script>
+
     <script src="../javascript/api.js"></script>
     <script src="../javascript/auth.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../javascript/ui.js"></script>
     <script src="../javascript/dashboard.js"></script>
 
-</body>
+</body>>
 
 </html>

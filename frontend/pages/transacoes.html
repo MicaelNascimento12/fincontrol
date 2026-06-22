@@ -10,26 +10,15 @@
     <link rel="stylesheet" href="../css/components.css">
 </head>
 
-<body>
+<body data-page="transacoes" data-title="Transações">
 
     <div class="layout">
 
-        <aside class="sidebar">
+        <aside id="appSidebar" class="sidebar"></aside>
 
-            <div class="logo">
-                <h2>FinControl</h2>
-            </div>
+        <main class="content">
 
-            <nav>
-                <a href="dashboard.html">Dashboard</a>
-                <a href="transacoes.html" class="active">Transações</a>
-                <a href="categorias.html">Categorias</a>
-                <a href="perfil.html">Perfil</a>
-            </nav>
-
-            <button id="btnLogout" class="btn-logout">Sair</button>
-
-        </aside>
+            <header id="appHeader" class="topbar"></header>
 
         <main class="content">
 
@@ -39,7 +28,13 @@
             </header>
 
             <section class="panel">
-                <h2 id="formTitulo">Nova Transação</h2>
+                <div class="panel-heading">
+            <span class="section-icon">
+                <i data-lucide="receipt-text"></i>
+            </span>
+
+            <h2 id="formTitulo">Nova Transação</h2>
+        </div>
 
                 <form id="transacaoForm" class="form-grid">
 
@@ -89,11 +84,18 @@
 
                     <div class="form-actions full">
                         <button type="submit" class="btn-primary" id="btnSalvar">
-                            Salvar
+                            <i data-lucide="save"></i>
+                            <span>Salvar</span>
                         </button>
 
-                        <button type="button" class="btn-secondary" id="btnCancelarEdicao">
-                            Cancelar edição
+                        <button
+                            type="button"
+                            class="btn-secondary"
+                            id="btnCancelarEdicao"
+                            style="display: none;"
+                        >
+                            <i data-lucide="x"></i>
+                            <span>Cancelar edição</span>
                         </button>
                     </div>
 
@@ -103,8 +105,15 @@
             </section>
 
             <section class="panel">
-                <div class="section-header">
-                    <h2>Minhas Transações</h2>
+                <div class="panel-heading panel-heading-between">
+
+                    <div class="panel-heading-main">
+                        <span class="section-icon">
+                            <i data-lucide="list"></i>
+                        </span>
+
+                        <h2>Minhas Transações</h2>
+                    </div>
 
                     <div class="filters">
                         <select id="filtroTipo">
@@ -117,6 +126,7 @@
                             <option value="">Todas as categorias</option>
                         </select>
                     </div>
+
                 </div>
 
                 <div class="table-wrapper">
@@ -146,9 +156,62 @@
 
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/lucide@1.21.0/dist/umd/lucide.min.js"></script>
+
     <script src="../javascript/api.js"></script>
     <script src="../javascript/auth.js"></script>
+    <script src="../javascript/ui.js"></script>
     <script src="../javascript/transacoes.js"></script>
+
+    <div class="modal-overlay" id="modalExcluirTransacao">
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <div class="modal-icon">
+                    <i data-lucide="trash-2"></i>
+                </div>
+
+                <div class="modal-copy">
+                    <h3>Excluir transação</h3>
+
+                    <p>
+                        Tem certeza que deseja excluir esta transação?
+                        <br>
+                        <span class="warning-text">
+                            Esta ação não pode ser desfeita.
+                        </span>
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    id="btnFecharModalTransacao"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-danger"
+                    id="btnConfirmarExcluirTransacao"
+                >
+                    <i data-lucide="trash-2"></i>
+                    Sim, excluir
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
 
 </body>
 
