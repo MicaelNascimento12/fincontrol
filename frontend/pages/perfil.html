@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil | FinControl</title>
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                <h2>FinControl</h2>
+            </div>
+
+            <nav>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="transacoes.html">Transações</a>
+                <a href="categorias.html">Categorias</a>
+                <a href="perfil.html" class="active">Perfil</a>
+            </nav>
+
+            <button id="btnLogout" class="btn-logout">Sair</button>
+
+        </aside>
+
+        <main class="content">
+
+            <header class="header">
+                <h1>Meu Perfil</h1>
+                <span id="usuarioNomeTopo">Carregando...</span>
+            </header>
+
+            <section class="panel">
+                <h2>Dados da conta</h2>
+
+                <form id="perfilForm" class="form-grid">
+
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dataCriacao">Data de criação</label>
+                        <input type="text" id="dataCriacao" disabled>
+                    </div>
+
+                    <div class="form-actions full">
+                        <button type="button" class="btn-secondary" id="btnEditarPerfil">
+                            Editar informações
+                        </button>
+
+                        <button type="submit" class="btn-primary" id="btnSalvarPerfil" style="display: none;">
+                            Salvar alterações
+                        </button>
+
+                        <button type="button" class="btn-secondary" id="btnCancelarPerfil" style="display: none;">
+                            Cancelar
+                        </button>
+                    </div>
+
+                    <div id="mensagemPerfil" class="message full"></div>
+
+                </form>
+            </section>
+
+            <section class="panel">
+                <h2>Alterar senha</h2>
+
+                <form id="senhaForm" class="form-grid">
+
+                    <div class="form-group">
+                        <label for="senhaAtual">Senha atual</label>
+                        <input type="password" id="senhaAtual" required minlength="6">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="novaSenha">Nova senha</label>
+                        <input type="password" id="novaSenha" required minlength="6">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmarSenha">Confirmar nova senha</label>
+                        <input type="password" id="confirmarSenha" required minlength="6">
+                    </div>
+
+                    <div class="form-actions full">
+                        <button type="button" class="btn-secondary" id="btnMostrarSenha">
+                            Alterar senha
+                        </button>
+
+                        <button type="submit" class="btn-primary" id="btnSalvarSenha" style="display: none;">
+                            Salvar nova senha
+                        </button>
+
+                        <button type="button" class="btn-secondary" id="btnCancelarSenha" style="display: none;">
+                            Cancelar
+                        </button>
+                    </div>
+
+                    <div id="mensagemSenha" class="message full"></div>
+
+                </form>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../javascript/api.js"></script>
+    <script src="../javascript/auth.js"></script>
+    <script src="../javascript/perfil.js"></script>
+
+</body>
+
+</html>
