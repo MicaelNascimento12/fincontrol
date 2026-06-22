@@ -32,7 +32,7 @@ def criar(
 
 @router.put("/{categoria_id}", response_model=CategoriaResponse)
 def atualizar(
-    categoria_id: int,
+    categoria_id: str,
     dados: CategoriaUpdate,
     db: Session = Depends(get_db),
     usuario: Usuario = Depends(get_usuario_atual)
@@ -48,7 +48,7 @@ def atualizar(
 
 @router.delete("/{categoria_id}", status_code=204)
 def deletar(
-    categoria_id: int,
+    categoria_id: str,
     db: Session = Depends(get_db),
     usuario: Usuario = Depends(get_usuario_atual)
 ):
