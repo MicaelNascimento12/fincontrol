@@ -17,27 +17,33 @@ CATEGORIAS_PADRAO = [
 ]
 
 
-def criar_categorias_padrao(db: Session, user_id: int) -> None:
+def criar_categorias_padrao(db: Session, user_id: str) -> None:
     for nome in CATEGORIAS_PADRAO:
         categoria = Categoria(user_id=user_id, nome=nome)
         db.add(categoria)
-    db.commit()
 
 
-def listar(db: Session, user_id: int) -> list[Categoria]:
+def listar(db: Session, user_id: str) -> list[Categoria]:
     return db.query(Categoria).filter(
         Categoria.user_id == user_id
     ).all()
 
 
-def buscar_por_id(db: Session, categoria_id: int, user_id: int) -> Categoria | None:
+def buscar_por_id(db: Session, categoria_id: str, user_id: str) -> Categoria | None:
     return db.query(Categoria).filter(
         Categoria.id == categoria_id,
         Categoria.user_id == user_id
     ).first()
 
 
-def criar(db: Session, user_id: int, nome: str) -> Categoria:
+def buscar_por_nome(db: Session, user_id: str, nome: str) -> Categoria | None:
+    return db.query(Categoria).filter(
+        Categoria.user_id == user_id,
+        Categoria.nome == nome
+    ).first()
+
+
+def criar(db: Session, user_id: str, nome: str) -> Categoria:
     categoria = Categoria(user_id=user_id, nome=nome)
     db.add(categoria)
     db.commit()

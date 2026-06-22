@@ -21,6 +21,23 @@ def criar(db: Session, nome: str, email: str, senha_hash: str) -> Usuario:
     db.refresh(usuario)
     return usuario
 
+def criar_sem_commit(
+    db: Session,
+    nome: str,
+    email: str,
+    senha_hash: str
+) -> Usuario:
+    usuario = Usuario(
+        nome=nome,
+        email=email,
+        senha_hash=senha_hash
+    )
+
+    db.add(usuario)
+    db.flush()
+
+    return usuario
+
 
 def atualizar(db: Session, usuario: Usuario, dados: dict) -> Usuario:
     for campo, valor in dados.items():
