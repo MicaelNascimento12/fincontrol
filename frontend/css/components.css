@@ -154,3 +154,150 @@
     margin-top: 20px;
     max-height: 300px;
 }
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.form-grid .full {
+    grid-column: 1 / -1;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 15px;
+    background: white;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-secondary {
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--text);
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background: #f3f4f6;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.filters {
+    display: flex;
+    gap: 12px;
+}
+
+.filters select {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: white;
+}
+
+.table-wrapper {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #f9fafb;
+}
+
+th,
+td {
+    padding: 14px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    font-size: 14px;
+}
+
+.badge {
+    padding: 5px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.badge.receita {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge.despesa {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.badge.pago {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.badge.pendente {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.badge.cancelado {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.btn-small {
+    border: none;
+    padding: 7px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: 700;
+    margin-right: 4px;
+}
+
+.btn-edit {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.btn-delete {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+@media(max-width:900px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filters {
+        width: 100%;
+        flex-direction: column;
+    }
+}

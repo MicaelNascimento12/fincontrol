@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transações | FinControl</title>
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                <h2>FinControl</h2>
+            </div>
+
+            <nav>
+                <a href="dashboard.html">📊 Dashboard</a>
+                <a href="transacoes.html" class="active">💰 Transações</a>
+                <a href="#">🏷️ Categorias</a>
+                <a href="#">👤 Perfil</a>
+            </nav>
+
+            <button id="btnLogout" class="btn-logout">Sair</button>
+
+        </aside>
+
+        <main class="content">
+
+            <header class="header">
+                <h1>Transações</h1>
+                <span id="usuarioNome">Carregando...</span>
+            </header>
+
+            <section class="panel">
+                <h2 id="formTitulo">Nova Transação</h2>
+
+                <form id="transacaoForm" class="form-grid">
+
+                    <input type="hidden" id="transacaoId">
+
+                    <div class="form-group">
+                        <label for="descricao">Descrição</label>
+                        <input type="text" id="descricao" placeholder="Ex: Mercado">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="valor">Valor</label>
+                        <input type="number" id="valor" step="0.01" min="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="data">Data</label>
+                        <input type="date" id="data" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tipo">Tipo</label>
+                        <select id="tipo" required>
+                            <option value="receita">Receita</option>
+                            <option value="despesa">Despesa</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" required>
+                            <option value="pago">Pago</option>
+                            <option value="pendente">Pendente</option>
+                            <option value="cancelado">Cancelado</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoria">Categoria</label>
+                        <select id="categoria" required></select>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="observacao">Observação</label>
+                        <input type="text" id="observacao" placeholder="Opcional">
+                    </div>
+
+                    <div class="form-actions full">
+                        <button type="submit" class="btn-primary" id="btnSalvar">
+                            Salvar
+                        </button>
+
+                        <button type="button" class="btn-secondary" id="btnCancelarEdicao">
+                            Cancelar edição
+                        </button>
+                    </div>
+
+                    <div id="mensagem" class="message full"></div>
+
+                </form>
+            </section>
+
+            <section class="panel">
+                <div class="section-header">
+                    <h2>Minhas Transações</h2>
+
+                    <div class="filters">
+                        <select id="filtroTipo">
+                            <option value="">Todos os tipos</option>
+                            <option value="receita">Receitas</option>
+                            <option value="despesa">Despesas</option>
+                        </select>
+
+                        <select id="filtroCategoria">
+                            <option value="">Todas as categorias</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Tipo</th>
+                                <th>Status</th>
+                                <th>Valor</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tabelaTransacoes">
+                            <tr>
+                                <td colspan="7">Carregando...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../javascript/api.js"></script>
+    <script src="../javascript/auth.js"></script>
+    <script src="../javascript/transacoes.js"></script>
+
+</body>
+
+</html>
