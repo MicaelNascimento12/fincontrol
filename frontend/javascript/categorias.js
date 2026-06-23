@@ -67,20 +67,31 @@ function renderizarTabela() {
 
     categorias.forEach(categoria => {
         tbody.innerHTML += `
-            <tr>
-                <td>${categoria.nome}</td>
-                <td>
-                    <button class="btn-small btn-edit" onclick="editarCategoria('${categoria.id}')">
-                        Editar
-                    </button>
+    <tr>
+        <td>${categoria.nome}</td>
 
-                    <button class="btn-small btn-delete" onclick="abrirModalExcluirCategoria('${categoria.id}')">
-                        Excluir
-                    </button>
-                </td>
-            </tr>
-        `;
+        <td>
+            <button
+                class="btn-small btn-edit"
+                onclick="editarCategoria('${categoria.id}')"
+            >
+                <i data-lucide="pencil"></i>
+                Editar
+            </button>
+
+            <button
+                class="btn-small btn-delete"
+                onclick="abrirModalExcluirCategoria('${categoria.id}')"
+            >
+                <i data-lucide="trash-2"></i>
+                Excluir
+            </button>
+        </td>
+    </tr>
+`;
     });
+    renderizarIcones();
+
 }
 
 
@@ -188,29 +199,3 @@ function mostrarMensagem(texto, tipo) {
         mensagem.textContent = "";
     }, 3000);
 }
-
-tbody.innerHTML += `
-    <tr>
-        <td>${categoria.nome}</td>
-
-        <td>
-            <button
-                class="btn-small btn-edit"
-                onclick="editarCategoria('${categoria.id}')"
-            >
-                <i data-lucide="pencil"></i>
-                Editar
-            </button>
-
-            <button
-                class="btn-small btn-delete"
-                onclick="abrirModalExcluirCategoria('${categoria.id}')"
-            >
-                <i data-lucide="trash-2"></i>
-                Excluir
-            </button>
-        </td>
-    </tr>
-`;
-
-renderizarIcones();

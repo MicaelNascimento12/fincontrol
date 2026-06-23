@@ -20,89 +20,98 @@
 
             <header id="appHeader" class="topbar"></header>
 
-        <!-- Conteúdo -->
+            <div class="content-inner">
 
-        <main class="content">
+                <section class="cards">
 
-            <header class="header">
+                    <div class="card">
+                        <div class="card-heading">
+                            <span class="card-icon card-icon-balance">
+                                <i data-lucide="wallet"></i>
+                            </span>
 
-                <h1>Dashboard Financeiro</h1>
+                            <h3>Saldo atual</h3>
+                        </div>
 
-                <span id="usuarioNome">
-                    Carregando...
-                </span>
-
-            </header>
-
-            <!-- Cards -->
-
-            <section class="cards">
-
-                <div class="card">
-                    <div class="card-heading">
-                        <span class="card-icon card-icon-balance">
-                            <i data-lucide="wallet"></i>
-                        </span>
-
-                        <h3>Saldo atual</h3>
+                        <p id="saldo">R$ 0,00</p>
                     </div>
 
-                    <p id="saldo">R$ 0,00</p>
-                </div>
+                    <div class="card">
+                        <div class="card-heading">
+                            <span class="card-icon card-icon-income">
+                                <i data-lucide="trending-up"></i>
+                            </span>
 
-                <div class="card">
-                    <div class="card-heading">
-                        <span class="card-icon card-icon-income">
-                            <i data-lucide="trending-up"></i>
-                        </span>
+                            <h3>Receitas</h3>
+                        </div>
 
-                        <h3>Receitas</h3>
+                        <p id="receitas">R$ 0,00</p>
                     </div>
 
-                    <p id="receitas">R$ 0,00</p>
-                </div>
+                    <div class="card">
+                        <div class="card-heading">
+                            <span class="card-icon card-icon-expense">
+                                <i data-lucide="trending-down"></i>
+                            </span>
 
-                <div class="card">
-                    <div class="card-heading">
-                        <span class="card-icon card-icon-expense">
-                            <i data-lucide="trending-down"></i>
-                        </span>
+                            <h3>Despesas</h3>
+                        </div>
 
-                        <h3>Despesas</h3>
+                        <p id="despesas">R$ 0,00</p>
                     </div>
 
-                    <p id="despesas">R$ 0,00</p>
-                </div>
+                </section>
 
-            </section>
+                <section class="charts-grid">
 
-            <!-- Próximos gráficos -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <span class="section-icon">
+                                <i data-lucide="chart-pie"></i>
+                            </span>
 
-            <section class="charts-grid">
-                <div class="panel">
-                    <h2>Gastos por Categoria</h2>
-                    <p id="semDadosCategorias" class="empty-message">Nenhuma despesa paga cadastrada.</p>
-                    <canvas id="graficoCategorias"></canvas>
-                </div>
+                            <h2>Gastos por Categoria</h2>
+                        </div>
 
-                <div class="panel">
-                    <h2>Fluxo Mensal</h2>
-                    <p id="semDadosFluxo" class="empty-message">Nenhuma transação paga cadastrada.</p>
-                    <canvas id="graficoFluxoMensal"></canvas>
-                </div>
-            </section>
+                        <p id="semDadosCategorias" class="empty-message">
+                            Nenhuma despesa paga cadastrada.
+                        </p>
+
+                        <canvas id="graficoCategorias"></canvas>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <span class="section-icon">
+                                <i data-lucide="chart-line"></i>
+                            </span>
+
+                            <h2>Fluxo Mensal</h2>
+                        </div>
+
+                        <p id="semDadosFluxo" class="empty-message">
+                            Nenhuma transação paga cadastrada.
+                        </p>
+
+                        <canvas id="graficoFluxoMensal"></canvas>
+                    </div>
+
+                </section>
+
+            </div>
 
         </main>
 
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/lucide@1.21.0/dist/umd/lucide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="../javascript/api.js"></script>
     <script src="../javascript/auth.js"></script>
     <script src="../javascript/ui.js"></script>
     <script src="../javascript/dashboard.js"></script>
 
-</body>>
+</body>
 
 </html>

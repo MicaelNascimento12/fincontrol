@@ -20,64 +20,152 @@
 
             <header id="appHeader" class="topbar"></header>
 
-        <main class="content">
+            <div class="content-inner">
 
-            <header class="header">
-                <h1>Categorias</h1>
-                <span id="usuarioNome">Carregando...</span>
-            </header>
+                <section class="panel">
 
-            <section class="panel">
-                <h2 id="formTitulo">Nova Categoria</h2>
+                    <div class="panel-heading">
+                        <span class="section-icon">
+                            <i data-lucide="tag"></i>
+                        </span>
 
-                <form id="categoriaForm" class="form-grid">
-
-                    <input type="hidden" id="categoriaId">
-
-                    <div class="form-group full">
-                        <label for="nome">Nome da categoria</label>
-                        <input type="text" id="nome" required placeholder="Ex: Música, Serviços, Salário">
+                        <h2 id="formTitulo">Nova Categoria</h2>
                     </div>
 
-                    <div class="form-actions full">
-                        <button type="submit" class="btn-primary">
-                            Salvar
-                        </button>
+                    <form id="categoriaForm" class="form-grid">
 
-                        <button type="button" class="btn-secondary" id="btnCancelarEdicao" style="display: none;">
-                            Cancelar edição
-                        </button>
+                        <input type="hidden" id="categoriaId">
+
+                        <div class="form-group full">
+                            <label for="nome">Nome da categoria</label>
+
+                            <input
+                                type="text"
+                                id="nome"
+                                required
+                                placeholder="Ex: Música, Serviços, Salário"
+                            >
+                        </div>
+
+                        <div class="form-actions full">
+
+                            <button type="submit" class="btn-primary">
+                                <i data-lucide="save"></i>
+                                <span>Salvar</span>
+                            </button>
+
+                            <button
+                                type="button"
+                                class="btn-secondary"
+                                id="btnCancelarEdicao"
+                                style="display:none;"
+                            >
+                                <i data-lucide="x"></i>
+                                <span>Cancelar edição</span>
+                            </button>
+
+                        </div>
+
+                        <div id="mensagem" class="message full"></div>
+
+                    </form>
+
+                </section>
+
+                <section class="panel">
+
+                    <div class="panel-heading">
+
+                        <span class="section-icon">
+                            <i data-lucide="tags"></i>
+                        </span>
+
+                        <h2>Minhas Categorias</h2>
+
                     </div>
 
-                    <div id="mensagem" class="message full"></div>
+                    <div class="table-wrapper">
 
-                </form>
-            </section>
+                        <table>
 
-            <section class="panel">
-                <div class="section-header">
-                    <h2>Minhas Categorias</h2>
-                </div>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th style="width: 180px;">Ações</th>
+                                </tr>
+                            </thead>
 
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
+                            <tbody id="tabelaCategorias">
+                                <tr>
+                                    <td colspan="2">
+                                        Carregando...
+                                    </td>
+                                </tr>
+                            </tbody>
 
-                        <tbody id="tabelaCategorias">
-                            <tr>
-                                <td colspan="2">Carregando...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </div>
 
         </main>
+
+    </div>
+
+    <!-- Modal -->
+
+    <div class="modal-overlay" id="modalExcluirCategoria">
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <div class="modal-icon">
+                    <i data-lucide="trash-2"></i>
+                </div>
+
+                <div class="modal-copy">
+
+                    <h3>Excluir categoria</h3>
+
+                    <p>
+                        Tem certeza que deseja excluir esta categoria?
+                        <br>
+
+                        <span class="warning-text">
+                            Se houver transações vinculadas, a exclusão não será permitida.
+                        </span>
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    id="btnFecharModalCategoria"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-danger"
+                    id="btnConfirmarExcluirCategoria"
+                >
+                    <i data-lucide="trash-2"></i>
+                    <span>Sim, excluir</span>
+                </button>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -87,26 +175,6 @@
     <script src="../javascript/auth.js"></script>
     <script src="../javascript/ui.js"></script>
     <script src="../javascript/categorias.js"></script>
-
-    <div class="modal-overlay" id="modalExcluirCategoria">
-    <div class="modal">
-        <h3>Excluir categoria</h3>
-        <p>
-            Tem certeza que deseja excluir esta categoria?
-            <br>
-            <span class="warning-text">Se houver transações vinculadas, a exclusão não será permitida.</span>
-        </p>
-
-        <div class="modal-actions">
-            <button type="button" class="btn-secondary" id="btnFecharModalCategoria">
-                Cancelar
-            </button>
-            <button type="button" class="btn-danger" id="btnConfirmarExcluirCategoria">
-                Sim, excluir
-            </button>
-        </div>
-    </div>
-</div>
 
 </body>
 

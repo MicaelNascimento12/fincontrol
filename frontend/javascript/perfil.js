@@ -83,7 +83,8 @@ async function carregarPerfil() {
     try {
         usuarioLogado = await apiRequest("/usuarios/me");
 
-        document.getElementById("usuarioNomeTopo").textContent = usuarioLogado.nome;
+        atualizarUsuarioTopo(usuarioLogado.nome);
+
         document.getElementById("nome").value = usuarioLogado.nome;
         document.getElementById("email").value = usuarioLogado.email;
 

@@ -20,103 +20,146 @@
 
             <header id="appHeader" class="topbar"></header>
 
-        <main class="content">
+            <div class="content-inner">
 
-            <header class="header">
-                <h1>Relatórios</h1>
-                <span id="usuarioNome">Carregando...</span>
-            </header>
+                <section class="panel">
 
-            <section class="panel">
-                <h2>Filtros</h2>
+                    <div class="panel-heading">
+                        <span class="section-icon">
+                            <i data-lucide="filter"></i>
+                        </span>
 
-                <form id="filtrosForm" class="form-grid">
-
-                    <div class="form-group">
-                        <label for="filtroTipo">Tipo</label>
-                        <select id="filtroTipo">
-                            <option value="">Todos</option>
-                            <option value="receita">Receitas</option>
-                            <option value="despesa">Despesas</option>
-                        </select>
+                        <h2>Filtros</h2>
                     </div>
 
-                    <div class="form-group">
-                        <label for="filtroCategoria">Categoria</label>
-                        <select id="filtroCategoria">
-                            <option value="">Todas</option>
-                        </select>
+                    <form id="filtrosForm" class="form-grid">
+
+                        <div class="form-group">
+                            <label for="filtroTipo">Tipo</label>
+                            <select id="filtroTipo">
+                                <option value="">Todos</option>
+                                <option value="receita">Receitas</option>
+                                <option value="despesa">Despesas</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="filtroCategoria">Categoria</label>
+                            <select id="filtroCategoria">
+                                <option value="">Todas</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dataInicio">Data inicial</label>
+                            <input type="date" id="dataInicio">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dataFim">Data final</label>
+                            <input type="date" id="dataFim">
+                        </div>
+
+                        <div class="form-actions full">
+                            <button type="submit" class="btn-primary">
+                                <i data-lucide="file-search"></i>
+                                <span>Gerar relatório</span>
+                            </button>
+
+                            <button type="button" class="btn-secondary" id="btnLimparFiltros">
+                                <i data-lucide="rotate-ccw"></i>
+                                <span>Limpar filtros</span>
+                            </button>
+                        </div>
+
+                        <div id="mensagem" class="message full"></div>
+
+                    </form>
+
+                </section>
+
+                <section class="cards">
+
+                    <div class="card">
+                        <div class="card-heading">
+                            <span class="card-icon card-icon-income">
+                                <i data-lucide="trending-up"></i>
+                            </span>
+
+                            <h3>Receitas no período</h3>
+                        </div>
+
+                        <p id="totalReceitas">R$ 0,00</p>
                     </div>
 
-                    <div class="form-group">
-                        <label for="dataInicio">Data inicial</label>
-                        <input type="date" id="dataInicio">
+                    <div class="card">
+                        <div class="card-heading">
+                            <span class="card-icon card-icon-expense">
+                                <i data-lucide="trending-down"></i>
+                            </span>
+
+                            <h3>Despesas no período</h3>
+                        </div>
+
+                        <p id="totalDespesas">R$ 0,00</p>
                     </div>
 
-                    <div class="form-group">
-                        <label for="dataFim">Data final</label>
-                        <input type="date" id="dataFim">
+                    <div class="card">
+                        <div class="card-heading">
+                            <span class="card-icon card-icon-balance">
+                                <i data-lucide="wallet"></i>
+                            </span>
+
+                            <h3>Saldo do período</h3>
+                        </div>
+
+                        <p id="saldoPeriodo">R$ 0,00</p>
                     </div>
 
-                    <div class="form-actions full">
-                        <button type="submit" class="btn-primary">
-                            Gerar relatório
-                        </button>
+                </section>
 
-                        <button type="button" class="btn-secondary" id="btnLimparFiltros">
-                            Limpar filtros
-                        </button>
+                <section class="panel">
+
+                    <div class="panel-heading panel-heading-between">
+
+                        <div class="panel-heading-main">
+                            <span class="section-icon">
+                                <i data-lucide="table"></i>
+                            </span>
+
+                            <h2>Transações encontradas</h2>
+                        </div>
+
+                        <span id="quantidadeRegistros">0 registros</span>
+
                     </div>
 
-                    <div id="mensagem" class="message full"></div>
+                    <div class="table-wrapper">
 
-                </form>
-            </section>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Descrição</th>
+                                    <th>Categoria</th>
+                                    <th>Tipo</th>
+                                    <th>Status</th>
+                                    <th>Valor</th>
+                                </tr>
+                            </thead>
 
-            <section class="cards">
-                <div class="card">
-                    <h3>Receitas no período</h3>
-                    <p id="totalReceitas">R$ 0,00</p>
-                </div>
+                            <tbody id="tabelaRelatorio">
+                                <tr>
+                                    <td colspan="6">Carregando...</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                <div class="card">
-                    <h3>Despesas no período</h3>
-                    <p id="totalDespesas">R$ 0,00</p>
-                </div>
+                    </div>
 
-                <div class="card">
-                    <h3>Saldo do período</h3>
-                    <p id="saldoPeriodo">R$ 0,00</p>
-                </div>
-            </section>
+                </section>
 
-            <section class="panel">
-                <div class="section-header">
-                    <h2>Transações encontradas</h2>
-                    <span id="quantidadeRegistros">0 registros</span>
-                </div>
-
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Data</th>
-                                <th>Descrição</th>
-                                <th>Categoria</th>
-                                <th>Tipo</th>
-                                <th>Status</th>
-                                <th>Valor</th>
-                            </tr>
-                        </thead>
-
-                        <tbody id="tabelaRelatorio">
-                            <tr>
-                                <td colspan="6">Carregando...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
+            </div>
 
         </main>
 
